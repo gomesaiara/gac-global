@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAC Global — Pan-African Operational Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --card: #181818;
+      --border: #2a2a2a;
+      --gold: #C9A84C;
+      --gold-light: #e0c068;
+      --white: #ffffff;
+      --grey: #999999;
+      --light: #f5f5f5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--grey);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--black) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 4px;
+      font-weight: 600 !important;
+      font-size: 0.82rem !important;
+      letter-spacing: 0.06em;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-light) !important; color: var(--black) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 0.3rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      max-width: 820px;
+      margin-bottom: 1.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--grey);
+      max-width: 560px;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--gold-light); }
+
+    .btn-secondary {
+      color: var(--grey);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-secondary:hover { color: var(--white); border-color: var(--grey); }
+
+    .hero-corridor {
+      margin-top: 5rem;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .corridor-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .corridor-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .corridor-dot.inactive {
+      background: transparent;
+      border: 1px solid var(--border);
+    }
+
+    .corridor-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    .corridor-label.active { color: var(--gold); }
+
+    .corridor-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), var(--border));
+      margin-bottom: 1.1rem;
+      min-width: 60px;
+    }
+
+    /* METRICS */
+    .metrics {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .metric {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .metric-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 7rem 3rem;
+    }
+
+    .section-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      max-width: 640px;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--grey);
+      max-width: 580px;
+      line-height: 1.75;
+      margin-bottom: 4rem;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--grey);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .about-text p strong { color: var(--white); font-weight: 600; }
+
+    .about-quote {
+      border-left: 2px solid var(--gold);
+      padding: 1.5rem 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .about-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--light);
+      margin-bottom: 1rem;
+    }
+
+    .about-quote cite {
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-style: normal;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .about-stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+      border-radius: 6px;
+    }
+
+    .about-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .about-stat-label {
+      font-size: 0.8rem;
+      color: var(--grey);
+      letter-spacing: 0.04em;
+    }
+
+    /* NODES */
+    .nodes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .node-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .node-card:hover { border-color: var(--gold); }
+
+    .node-card.active { border-color: rgba(201,168,76,0.4); }
+
+    .node-header {
+      padding: 2rem 2rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .node-status {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 2px;
+      margin-bottom: 1.25rem;
+    }
+
+    .node-status.live {
+      background: rgba(201,168,76,0.15);
+      color: var(--gold);
+    }
+
+    .node-status.q1-2027 {
+      background: rgba(255,255,255,0.06);
+      color: var(--grey);
+    }
+
+    .node-status.q2-2027 {
+      background: rgba(255,255,255,0.06);
+      color: var(--grey);
+    }
+
+    .node-country {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .node-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .node-hub {
+      font-size: 0.82rem;
+      color: var(--grey);
+      font-weight: 500;
+    }
+
+    .node-body {
+      padding: 1.75rem 2rem 2rem;
+    }
+
+    .node-body p {
+      font-size: 0.9rem;
+      color: var(--grey);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .node-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .node-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--grey);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.7rem;
+      border-radius: 3px;
+    }
+
+    /* SERVICES */
+    .services { background: var(--dark); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--black);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: border-color 0.3s;
+    }
+
+    .service-card:hover { border-color: var(--gold); }
+
+    .service-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background: rgba(201,168,76,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-icon svg { width: 20px; height: 20px; color: var(--gold); }
+
+    .service-name {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+
+    .service-price {
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+
+    .service-desc {
+      font-size: 0.88rem;
+      color: var(--grey);
+      line-height: 1.7;
+    }
+
+    /* PLATFORM */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .platform-features {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .platform-feature {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .feature-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .feature-text h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature-text p {
+      font-size: 0.85rem;
+      color: var(--grey);
+      line-height: 1.6;
+    }
+
+    .platform-visual {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.5rem;
+    }
+
+    .platform-visual-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    .os-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .os-item:last-child { border-bottom: none; }
+
+    .os-item-label {
+      font-size: 0.85rem;
+      color: var(--grey);
+    }
+
+    .os-item-value {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .os-item-badge {
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      background: rgba(201,168,76,0.15);
+      color: var(--gold);
+    }
+
+    /* CONTACT */
+    .contact { background: var(--dark); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      line-height: 1.25;
+    }
+
+    .contact-info p {
+      color: var(--grey);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .contact-detail-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .contact-detail-value {
+      font-size: 0.92rem;
+      color: var(--white);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--black);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.85rem 1rem;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 130px; }
+
+    .form-group select option { background: var(--black); }
+
+    .form-submit {
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+
+    .form-submit:hover { background: var(--gold-light); }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--white);
+    }
+
+    .footer-brand span { color: var(--gold); }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--grey);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--grey);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 991px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+      .metrics { grid-template-columns: repeat(2, 1fr); padding: 3rem 1.5rem; }
+      section { padding: 5rem 1.5rem; }
+      .about-grid, .platform-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .nodes-grid, .services-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">GAC <span>GLOBAL</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#nodes">The Corridor</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#platform">GAC OS</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Lobito Corridor · SADC · 2026–2029</div>
+    <h1>Africa's <em>Workforce<br>Mobility</em> Platform</h1>
+    <p>GAC Global is building the operational infrastructure that keeps Africa's energy and infrastructure projects running — one deployment at a time, across three strategic corridors.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Partner with GAC</a>
+      <a href="#nodes" class="btn-secondary">Explore the Corridor</a>
+    </div>
+    <div class="hero-corridor">
+      <div class="corridor-node">
+        <div class="corridor-dot"></div>
+        <div class="corridor-label active">Luanda</div>
+      </div>
+      <div class="corridor-line"></div>
+      <div class="corridor-node">
+        <div class="corridor-dot inactive"></div>
+        <div class="corridor-label">Lusaka</div>
+      </div>
+      <div class="corridor-line" style="background: linear-gradient(90deg, var(--border), var(--border));"></div>
+      <div class="corridor-node">
+        <div class="corridor-dot inactive"></div>
+        <div class="corridor-label">Windhoek</div>
+      </div>
+      <div class="corridor-line" style="background: linear-gradient(90deg, var(--border), var(--border));"></div>
+      <div class="corridor-node">
+        <div class="corridor-dot inactive"></div>
+        <div class="corridor-label">Walvis Bay</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METRICS -->
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-number">3</div>
+      <div class="metric-label">Strategic Nodes</div>
+    </div>
+    <div class="metric">
+      <div class="metric-number">36M</div>
+      <div class="metric-label">Expansion Plan</div>
+    </div>
+    <div class="metric">
+      <div class="metric-number">85</div>
+      <div class="metric-label">Deployments / Month Capacity</div>
+    </div>
+    <div class="metric">
+      <div class="metric-number">5</div>
+      <div class="metric-label">Integrated Services</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-tag">Who We Are</div>
+        <h2 class="section-title">One Platform. Three Corridors. Zero Friction.</h2>
+        <p>GAC Global is a pan-African workforce mobility company headquartered in Bilbao, Spain, with an operational hub in Lobito, Angola. We integrate legal compliance, HSSE protocols, and human mobility logistics under a single platform — replacing five fragmented providers with one accountable partner.</p>
+        <p>We were built to answer one question: <strong>why does it take so long to get a technical specialist from a European office to an African job site, ready to work?</strong> GAC OS — our proprietary operating system — makes that journey predictable, documented, and measurable.</p>
+        <p>Our founding node in Angola validates the model. Zambia and Namibia follow the same playbook — adapting to local regulations, fleet realities, and client ecosystems already familiar to us from Angola.</p>
+        <div class="about-quote">
+          <blockquote>"We are not a logistics company. We are the operational backbone that makes Africa's energy projects run on time."</blockquote>
+          <cite>Angelina G. Mayala — Managing Director &amp; Founder</cite>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="about-stat-num">100%</div>
+          <div class="about-stat-label">HSSE Compliance on all deployments</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">69</div>
+          <div class="about-stat-label">Toyota vehicles — operational fleet Angola</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">880m²</div>
+          <div class="about-stat-label">CCG Operations Center — Lobito</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">5→1</div>
+          <div class="about-stat-label">Providers replaced by GAC Framework</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NODES -->
+  <section id="nodes" style="background: var(--dark);">
+    <div class="section-tag">The Lobito Corridor</div>
+    <h2 class="section-title">Three Nodes. One Integrated Network.</h2>
+    <p class="section-sub">Each node is a fully operational GAC hub — built on the same standards, the same platform, and the same commitment to continuity. Angola validates the model. Zambia and Namibia scale it.</p>
+
+    <div class="nodes-grid">
+      <!-- ANGOLA -->
+      <div class="node-card active">
+        <div class="node-header">
+          <div class="node-status live">Live — 2026</div>
+          <div class="node-country">Angola</div>
+          <div class="node-name">GAC Continuity Luanda</div>
+          <div class="node-hub">Hub: Lobito · Luanda · Soyo · Cabinda</div>
+        </div>
+        <div class="node-body">
+          <p>The founding node. Angola is where GAC validates its entire model — fleet, legal structure, HSSE protocols, GAC OS, and client relationships. Every process built here is replicated across the corridor.</p>
+          <p>Operational across Angola's four oil & gas poles: the Luanda-Lobito corridor (Corridor projects), the Cabinda offshore complex (Chevron-operated), the Soyo industrial zone (Angola LNG / Bechtel / EnerMech), and the Eastern interior (Catoca diamond operations).</p>
+          <div class="node-tags">
+            <span class="node-tag">Oil & Gas</span>
+            <span class="node-tag">Mining</span>
+            <span class="node-tag">Infrastructure</span>
+            <span class="node-tag">Fleet-as-a-Service</span>
+            <span class="node-tag">GAC OS Live</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZAMBIA -->
+      <div class="node-card">
+        <div class="node-header">
+          <div class="node-status q1-2027">Launch — Q1 2027</div>
+          <div class="node-country">Zambia</div>
+          <div class="node-name">GAC Continuity Lusaka</div>
+          <div class="node-hub">Hub: Lusaka · Copperbelt</div>
+        </div>
+        <div class="node-body">
+          <p>Zambia is a natural extension: many of GAC's Angola clients operate in the Copperbelt. We follow our clients into their second market — no new acquisition cost, just expanded service territory.</p>
+          <p>The Copperbelt produces ~5% of global copper output. With the green energy transition driving copper demand, Zambia will mobilise thousands of technical specialists through 2030. GAC enters at the right moment, with an established brand and an authorised immigration agent registration from day one.</p>
+          <div class="node-tags">
+            <span class="node-tag">Mining / Copperbelt</span>
+            <span class="node-tag">GovTech Immigration</span>
+            <span class="node-tag">Infrastructure</span>
+            <span class="node-tag">Client Follow-on</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- NAMIBIA -->
+      <div class="node-card">
+        <div class="node-header">
+          <div class="node-status q2-2027">Launch — Q2 2027</div>
+          <div class="node-country">Namibia</div>
+          <div class="node-name">GAC Continuity Windhoek</div>
+          <div class="node-hub">Hub: Windhoek · Walvis Bay</div>
+        </div>
+        <div class="node-body">
+          <p>Namibia serves two strategic roles: Walvis Bay is the Atlantic alternative to Luanda as a logistics gateway for the SADC south corridor, and Namibia's institutional stability makes it the low-risk anchor for European clients entering the region.</p>
+          <p>GAC enters via a 51/49 JV with a local operator — reducing capital requirements and time to market while leveraging established local fleet and licences. GovTech integration active from launch via Namibia's e-services immigration platform.</p>
+          <div class="node-tags">
+            <span class="node-tag">Green Hydrogen</span>
+            <span class="node-tag">Port Logistics</span>
+            <span class="node-tag">JV Model</span>
+            <span class="node-tag">GovTech Immigration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services">
+    <div class="section-tag">Our Services</div>
+    <h2 class="section-title">Built for Every Deployment Scenario</h2>
+    <p class="section-sub">From a single emergency specialist to a 50-person rotating team on a 24-month contract — GAC has a structured product for every operational need.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="service-name">GAC Technical</div>
+        <div class="service-price">€3,800 / specialist / 7 days</div>
+        <div class="service-desc">Emergency deployment. One technical specialist, fully operational on site within 72 hours. Compliance, transport, and accommodation included.</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
+        <div class="service-name">GAC Lead</div>
+        <div class="service-price">€3,600 / month</div>
+        <div class="service-desc">Single specialist embedded in your team for 1 to 6 months. Full continuity management: visas, rotations, HSSE documentation, and logistics handled end-to-end.</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="service-name">GAC Unit</div>
+        <div class="service-price">€2,100–4,100 / person / month</div>
+        <div class="service-desc">Rotating teams of 5 to 50 specialists on 3-month to 2-year contracts. Designed for project-based O&G and infrastructure operations with predictable headcount cycles.</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <div class="service-name">GAC Executive</div>
+        <div class="service-price">€4,900 / month</div>
+        <div class="service-desc">Senior leadership continuity. Placement and full management of C-level and senior management profiles deployed for 6+ months in complex operational environments.</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h5l3 5v3h-8V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="service-name">Fleet-as-a-Service</div>
+        <div class="service-price">Custom pricing</div>
+        <div class="service-desc">Dedicated Toyota 4x4 fleet with driver and logistics coordinator for field operations. Available across Angola's four operational poles — Luanda, Soyo, Cabinda, and the Eastern corridor.</div>
+      </div>
+
+      <div class="service-card" style="border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.04);">
+        <div class="service-icon" style="background: rgba(201,168,76,0.15);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="service-name">CORE Ensemble</div>
+        <div class="service-price">Framework contracts — 18 to 36 months</div>
+        <div class="service-desc">Long-term operational continuity framework. CORE 1 (36 months / 35 deployments/month), CORE 2 (24 months / 30 deployments), CORE 3 (18 months / 20 deployments, quarterly billing). One contract, full corridor coverage.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section id="platform">
+    <div class="platform-grid">
+      <div>
+        <div class="section-tag">GAC OS</div>
+        <h2 class="section-title">The Operating System Behind Every Deployment</h2>
+        <p class="section-sub">GAC OS is the proprietary platform that coordinates every moving part of a workforce deployment — from visa application to site arrival. Built for the realities of African field operations.</p>
+        <div class="platform-features">
+          <div class="platform-feature">
+            <div class="feature-dot"></div>
+            <div class="feature-text">
+              <h4>Real-Time Deployment Tracking</h4>
+              <p>Every specialist, every leg of the journey — documented and visible to the client in real time. No black boxes.</p>
+            </div>
+          </div>
+          <div class="platform-feature">
+            <div class="feature-dot"></div>
+            <div class="feature-text">
+              <h4>GovTech Immigration Integration</h4>
+              <p>Authorised agent access to government immigration portals in Zambia and Namibia. Visa status tracked centrally, not by email thread.</p>
+            </div>
+          </div>
+          <div class="platform-feature">
+            <div class="feature-dot"></div>
+            <div class="feature-text">
+              <h4>HSSE Documentation Layer</h4>
+              <p>Every deployment compliant before departure. Medical clearances, inductions, HSSE protocols — automated, archived, auditable.</p>
+            </div>
+          </div>
+          <div class="platform-feature">
+            <div class="feature-dot"></div>
+            <div class="feature-text">
+              <h4>Client Portal (Axelor ERP)</h4>
+              <p>Your team's data — deployment history, documentation, invoicing — accessible via accounts.gomesaiara.com.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="platform-visual">
+        <div class="platform-visual-title">GAC OS — Live Dashboard</div>
+        <div class="os-item">
+          <span class="os-item-label">Active Deployments</span>
+          <span class="os-item-badge">Live</span>
+        </div>
+        <div class="os-item">
+          <span class="os-item-label">Corridor Coverage</span>
+          <span class="os-item-value">Angola · Zambia · Namibia</span>
+        </div>
+        <div class="os-item">
+          <span class="os-item-label">Monthly Capacity</span>
+          <span class="os-item-value">85 deployments</span>
+        </div>
+        <div class="os-item">
+          <span class="os-item-label">HSSE Compliance Rate</span>
+          <span class="os-item-value">100%</span>
+        </div>
+        <div class="os-item">
+          <span class="os-item-label">Fleet — Angola</span>
+          <span class="os-item-value">69 Toyota 4x4</span>
+        </div>
+        <div class="os-item">
+          <span class="os-item-label">Immigration Portal</span>
+          <span class="os-item-value">Zambia · Namibia</span>
+        </div>
+        <div class="os-item">
+          <span class="os-item-label">Client ERP</span>
+          <span class="os-item-value">accounts.gomesaiara.com</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="section-tag">Get in Touch</div>
+        <h3>Ready to deploy your team across the corridor?</h3>
+        <p>Whether you need one specialist in Luanda next week or a framework contract for your rotating team across three countries — we want to understand your operation and show you what GAC can do.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <span class="contact-detail-label">Managing Director</span>
+            <span class="contact-detail-value">Angelina G. Mayala</span>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Email</span>
+            <span class="contact-detail-value">angelina.m@gomesaiara.com</span>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Headquarters</span>
+            <span class="contact-detail-value">Bilbao, Spain</span>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Operational Hub</span>
+            <span class="contact-detail-value">Lobito, Angola</span>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Client Portal</span>
+            <span class="contact-detail-value">accounts.gomesaiara.com</span>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="return false;">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label>Company</label>
+          <input type="text" placeholder="Your company" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="your@company.com" />
+        </div>
+        <div class="form-group">
+          <label>What do you need?</label>
+          <select>
+            <option value="">Select a service</option>
+            <option>GAC Technical — Emergency deployment</option>
+            <option>GAC Lead — Single specialist, 1–6 months</option>
+            <option>GAC Unit — Rotating team</option>
+            <option>GAC Executive — Senior leadership</option>
+            <option>Fleet-as-a-Service</option>
+            <option>CORE Ensemble — Framework contract</option>
+            <option>Other / Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell us about your operation and what you need..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">GAC <span>GLOBAL</span> &nbsp;·&nbsp; Gomes Aiara Holdings</div>
+    <ul class="footer-links">
+      <li><a href="https://gomesaiara.com">gomesaiara.com</a></li>
+      <li><a href="https://careers.gomesaiara.com">Careers</a></li>
+      <li><a href="https://accounts.gomesaiara.com">Client Portal</a></li>
+      <li><a href="https://research.gomesaiara.com">Field Research</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 GAC Global. Bilbao · Luanda · Lusaka · Windhoek</div>
+  </footer>
+
+</body>
+</html>
